@@ -1,9 +1,9 @@
 <?php 
 session_start();
-// add product to the cart
-if (!isset($_SESSION['user']) || $_SESSION['user'][0]['is_admin'] != 1)
-{ 
-	header('location: ../form.php');
+
+if(!isset($_SESSION['email'])){
+    header('Location: form.php');
+    die;
 }
 
 if (isset($_POST['name'])
@@ -21,7 +21,7 @@ if (isset($_POST['name'])
     if(!move_uploaded_file($_FILES['img']['tmp_name'],dirname (__FILE__)."\\..\\pics\\".$_FILES['img']['name']))
         die('failed to move file');
     // connect to database
-    $link=mysqli_connect('localhost','root','','memoire') or die('erorr');
+    $link=mysqli_connect('localhost:3307','root','root','memoire') or die('erorr');
     //insert new product to database
     $tab="INSERT INTO product (name,price,description,image_path)
 		values ('$name','$price','$description','$image_path');";

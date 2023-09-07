@@ -1,14 +1,16 @@
 <?php
+
 session_start();
-// add product to the cart
-if (!isset($_SESSION['user']) || $_SESSION['user'][0]['is_admin'] != 1)
-{ 
-    header('location: ../form.php');
+
+if(!isset($_SESSION['email'])){
+    header('Location: form.php');
+    die;
 }
+
 $products = [];
-$hostname = 'localhost';
+$hostname = 'localhost:3307';
 $username = 'root';
-$password = '';
+$password = 'root';
 
 
 // Create connection
