@@ -1,5 +1,5 @@
 <?php
-
+include('connexion.php');
 session_start();
 $cart_products = "";
 $cart_total=0;
@@ -14,10 +14,7 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
     // Create connection
         $connect = mysqli_connect($hostname ,$username ,$password, "memoire");
     
-        // Check connection
-        if (!$connect) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
+  
     
 
     // Your existing code to fetch products from the 'product' table
@@ -83,6 +80,7 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
 
 
     <div class="wrapper">
+    <?php if (isset($products) && count($products) > 0) { ?>
     <h1>Shopping Cart</h1>
     <div class="project">
         <div class="shop">
@@ -106,12 +104,20 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
             
             <hr>
             <p><span>Total</span> <span>$<?= $cart_total ?></span></p>
-            <?php if (isset($_SESSION['user'])) { ?>
-                <a href="#" class="btn"><i class="fa fa-shopping-cart"></i> Checkout</a>
-            <?php } else { ?>
+           
+             
+           
                 <a href="singin.php" class="btn">Acheter</a>
-            <?php } ?>
+        
         </div>
+        <?php
+			} else {
+				echo "
+				<center>
+				<h1>Your cart is empty </h1></center>
+				";
+			}
+			?>
     </div>
 </div>
 
