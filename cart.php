@@ -1,5 +1,5 @@
 <?php
-@include('connexion.php'); 
+
 session_start();
 $cart_products = "";
 $cart_total=0;
@@ -7,14 +7,18 @@ $cart_total=0;
 if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
     $cart_products = implode(",", $_SESSION['cart']);
 
-// Create connection
-    $connect = mysqli_connect($hostname ,$username ,$password, "memoire");
-
-    // Check connection
-    if (!$connect) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-
+    $hostname = 'localhost';
+    $username = 'root';
+    $password = '';
+    
+    // Create connection
+        $connect = mysqli_connect($hostname ,$username ,$password, "memoire");
+    
+        // Check connection
+        if (!$connect) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+    
 
     // Your existing code to fetch products from the 'product' table
     $sql = "SELECT * FROM product WHERE id IN ($cart_products)";
@@ -59,24 +63,21 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
 
 <section class="header">
     <div class="logo">
-        <h1>e<span style="color:#054940;">X</span>pert<span style="color: #054940;">one</span></h1>
+        <h1>eXpertone</h1>
         </div>
     <!-- <a href="#"><img src="logo.png" class="logo"></a> -->
     <div>
-           <ul class="nav">
-             <li><a class="active" href="index.html"> Acceuil</a></li>
-             <li><a href="produits.php">Produits</a> <!--  <ul class="submenu">
-        <li><a href="#">Product 1</a></li>
-        <li><a href="#">Product 2</a></li>
-        <li><a href="#">Product 3</a></li>
-      </ul> --></li>
-             <li><a href="about.php"> à propos</a></li>
-             <li><a href="form.php"> Contact</a></li>
-             <li><a href="cart.php" class="bot"><i class="fa-solid fa-cart-plus"></i></a></li>
-        </ul>
+        <ul class="nav">
+            <li><a class="active" href="index.php"> Acceuil</a></li>
+            <li><a href="produits.php">Produits</a> </li>
+            <li><a href="about.html"> à propos</a></li>
+            <li><a href="form.php"> Contact</a></li>
+            <li><a href="cart.php" class="bot"><i class="fa-solid fa-cart-plus"></i></a></li>
+       </ul>
     </div>
     
 </section>
+
 		<!-----------cart----------->
 
 
@@ -114,96 +115,54 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
     </div>
 </div>
 
-	<!-- FOOTER-->
 
-        <script src="js/try.js"></script>
+<!--LAST PART | START-->
+<footer class="footer">
+    <div id="contact"></div>
+    <div class="container1">
+                 <div class="footer-col-left">
+      <h1>Expertone</h1>.com            
+      <p>Entreprise d'Expert One ,city El-akhwa  djelly,Rue N8 Eucalyptus -alger<br> <br>
+        Nous sommes une entreprise spécialisée dans le domaine des cosmétiques et des produits de soins de la peau. Apprenez-en davantage sur nous grâce à <a href="aboutus.php">ici</a></p>
+               </div>
+        <div class="row1">
 
-<footer class="footer-section">
-       
-            <div class="footer-content pt-5 pb-5">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-4 mb-50">
-                        <div class="footer-widget">
-                            <div class="footer-logo">
-                             <a href="index.html"><h1>e<span style="color:#054940;">X</span>pert<span style="color: #054940;">one</span></h1></a>
-                            </div>
-                            <div class="footer-text">
-                                <p>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor incididuntut consec tetur adipisicing
-                                elit,Lorem ipsum dolor sit amet.</p>
-                            </div>
-                                            </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
-                        <div class="footer-widget">
-                            <div class="footer-widget-heading">
-                                <h3>Useful Links</h3>
-                            </div>
-                            <ul>
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">about</a></li>
-                                <li><a href="#">services</a></li>
-                                <li><a href="#">portfolio</a></li>
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Our Services</a></li>
-                                <li><a href="#">Expert Team</a></li>
-                                <li><a href="#">Contact us</a></li>
-                                <li><a href="#">Latest News</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
-                   
-                        </div>
-                    </div>
-                </div>
+            <div class="footer-col">
+                <h4>Entreprise</h4>
+                <ul>
+                    <li><a href="index.html">Accuiel</a></li>
+                    <li><a href="about.html">A propose</a></li>
+                    <li><a href="produits.php">nos services</a></li>
+                
+                </ul>
             </div>
-             <!-- <div class="container">
-            <div class="footer-cta pt-5 pb-5">
-                <div class="row">
-                    <div class="col-xl-4 col-md-4 mb-30">
-                        <div class="single-cta">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div class="cta-text">
-                                <h4>Find us</h4>
-                                <span>1010 Avenue, sw 54321, chandigarh</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-4 mb-30">
-                        <div class="single-cta">
-                            <i class="fas fa-phone"></i>
-                            <div class="cta-text">
-                                <h4>Call us</h4>
-                                <span>9876543210 0</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-4 mb-30">
-                        <div class="single-cta">
-                            <i class="far fa-envelope-open"></i>
-                            <div class="cta-text">
-                                <h4>Mail us</h4>
-                                <span>mail@info.com</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="footer-col">
+                <h4>obtenir de l'aide</h4>
+                <ul>
+                 <li><a href="about.html">Help center</a></li>
+                 <li><a href="faq.php">FAQ</a></li>
+                 <li><a href="about.html">options de paiement</a></li>
+                </ul>
             </div>
-        </div> -->
-        <div class="copyright-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
-                        <div class="copyright-text">
-                            <p>Copyright &copy; 2018, All Right Reserved <a href="https://codepen.io/anupkumar92/">Anup</a></p>
-                        </div>
-                    </div>
-                  
+      
+            <div class="footer-col-social">
+                <h4>Suivez-nous</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100063640342753"> <i class="fab fa-facebook-f"></i></a>    
+                    <a href="mailto:expert.one.cos@gmail.com"><i class="far fa-envelope"></i></a>
+                    <a href="https://wa.me/213662162422"> <i class="fab fa-whatsapp"></i></a>
                 </div>
+                <p>Email: expert.one.cos@gmail.com <br>
+                    phone: +213 662 16 24 22
+                </p>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
+<!--LAST PART | END-->  
+
+ <script src="js/try.js"></script>
+
 </body>
 </html>
   
