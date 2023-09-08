@@ -9,16 +9,13 @@ if (isset($_POST['product_id'])) {
     echo '<script>alert("Product added succesfully!!");</script>';
 }
 
-$connect =mysqli_connect('localhost:3307','root','root','memoire');
+$connect =mysqli_connect('localhost','root','','memoire');
 
 $sql = "SELECT * FROM product ";
 
 $resultat = mysqli_query($connect, $sql);
 
 $products = $resultat->fetch_all(MYSQLI_ASSOC);
-
-$resultat = mysqli_query($connect, $sql);
-
 if (!$resultat) {
     die("MySQL Error: " . mysqli_error($connect));
 }
@@ -88,11 +85,11 @@ $id =     htmlentities($id);
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati sint illo corrupti dolorem a id expedita consequatur, architecto illum dolore minus quasi nostrum aliquid qui quia, dicta tempore quae. Amet.</p>
             <hr class="weet-hr">
             <p>livraison 58 wilaya is Available </p>
-            <form action="" method="post">
- 
-                        <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
-                        <button type="submit" class="btn"> add to cart</button>
-                    </form>
+         <form action="" method="post">
+    <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
+    <button type="submit" class="btn"> Add to Cart</button>
+</form>
+
         </div>
     </div>
 </div>
