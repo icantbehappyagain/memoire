@@ -1,37 +1,15 @@
 <?php
-session_start();
-include('config.php');
-if(!isset($_SESSION['email'])){
-    header('Location: login.php');
-    die;
-}
-// add product to the cart
-if (isset($_POST['product_id'])) {
-    if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
-    $_SESSION['cart'][$_POST['product_id']] = $_POST['product_id'];
-    echo '<script>alert("Le produit a été ajouté avec succès!!");</script>';
-}
+include "config.php";
 
-$connect =mysqli_connect('localhost:3307','root','root','memoire');
-
-$sql = "SELECT * FROM product ";
-
-$resultat = mysqli_query($connect, $sql);
-
-$products = $resultat->fetch_all(MYSQLI_ASSOC);
-if (!$resultat) {
-    die("MySQL Error: " . mysqli_error($connect));
-}
-?> 
-
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/product.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
@@ -39,65 +17,78 @@ if (!$resultat) {
 </head>
 <body>
 
-    <section class="header">
-        <div class="logo">
-            <h1>eXpertone</h1>
-            </div>
-        <!-- <a href="#"><img src="logo.png" class="logo"></a> -->
-        <div>
-            <ul class="nav">
-                 <li><a href="index.php"> Acceuil</a></li>
-                 <li><a href="products.php">Produits</a></li>
-                 <li><a href="about.php"> à propos</a></li>
-                 <li><a href="form.php"> Contact</a></li>
-                 <li><a href="cart.php" class="bot"><i class="fa-solid fa-cart-plus"></i></a></li>
-                 <li><a href="logout.php">Logout</a></li>
-            </ul>
+<section class="header">
+    <div class="logo">
+        <h1>eXpertone</h1>
         </div>
-        
-    </section>
-
+    <!-- <a href="#"><img src="logo.png" class="logo"></a> -->
+    <div>
+        <ul class="nav">
+             <li><a  href="index.php"> Acceuil</a></li>
+             <li><a class="active" href="products.php">Produits</a> <!--  <ul class="submenu">
+        <li><a href="#">Product 1</a></li>
+        <li><a href="#">Product 2</a></li>
+        <li><a href="#">Product 3</a></li>
+      </ul> --></li>
+             <li><a href="about.php"> à propos</a></li>
+             <li><a href="contact.php"> Contact</a></li>
+             <li><a href="cart.php" class="bot"><i class="fa-solid fa-cart-plus"></i></a></li>
+             <li><a href="login.php"> Login</a></li>
+        </ul>
+    </div>
     
-   
-<section class="pro">
+</section>
 
-<?php 
-$id=      $_GET['id'];
-$id =     mysqli_real_escape_string($conn ,$id);
-$id =     htmlentities($id);
-    $sql = "SELECT * FROM product WHERE id = $id limit 1";
+   
+
+   
+
+
+
+
+
+<section class="pro">
+    <div class="weet-title">
+        <h2>Tout les Produits</h2>
+        <hr class="hr center">
+    </div>
+ 
+      <div  class="row" >
+    <?php 
+    $sql = "SELECT * FROM product";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_assoc($result)){  
     ?>
-    <div class="col4">
-            <img src="<?php echo $row['image_path'];?>">
-        <div class="weet-info">
-            <h4><?php echo $row['name'];?></h4>
-            <hr class="hr">
-            <p><?php echo $row['description'];?></p>
-            <p class="price"><?php echo $row['price'];?> DA</p>
-            <p class="weet-small-t">Ce prix n'inclut pas les frais de livraison.</p>
-        </div>
-        <div class="weet-info-2">
-            <h2>Order</h2>
-            <p>Vous pouvez commander en cliquant sur le bouton Ajouter à la carte.</p>
-            <hr class="weet-hr">
-            <p>livraison 58 wilaya est disponible </p>
-         <form action="" method="post">
-    <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
-    <button type="submit" class="btn"> Ajouter à la carte</button>
-</form>
-
-        </div>
-    </div>
-</div>
+                <a href="product.php?id=<?php echo $row['id'];?>" class="col4">
+              <h4><?php echo $row['name'];?></h4>
+              <img src="<?php echo $row['image_path'];?>">
+              <p><?php echo $row['price'];?></p>
+      </a>
 <?php                 
   }
   }
-  ?>  
+  ?>          
+      </div>
 </section>
+
+
+
+
+
+
+
+
+
+
     
+
+
+      
+
+
+
+
 
 <!--LAST PART | START-->
 <footer class="footer">
@@ -159,5 +150,3 @@ $id =     htmlentities($id);
 </body>
 </html>
   
-</body>
-</html>

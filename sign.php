@@ -4,29 +4,36 @@ include 'config.php';
 session_start();
 
 if(isset($_SESSION['email'])){
-    header('Location:admin/index.php');
+    header('Location: index.php');
     die;
 }
 
 if (isset($_POST['submit'])){
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
+    $email =         mysqli_real_escape_string($conn ,$_POST['email']);
+    $password =      mysqli_real_escape_string($conn ,$_POST['password']);
 
-    $sql = "SELECT * FROM user WHERE email='$email' AND password='$password' limit 1";
+    $sql = "SELECT * FROM users WHERE email = '$email' ";
     $result = mysqli_query($conn, $sql);
-    
-    if($result -> num_rows > 0){
-        $row = mysqli_fetch_assoc($result);
-        $_SESSION['email'] = $row['email'];
-        header("Location: admin/index.php");
-        die;
-        } 
 
-        else{
-        }
+    if(!$result -> num_rows > 0){
+      $sql = "INSERT INTO users( email , password ) 
+      VALUES( '$email' , '$password') ";
+
+
+           if(mysqli_query($conn, $sql)){
+             session_start();
+             $_SESSION['email'] = $row['email'];
+              header('Location: login.php');
+              die;
+
+           }else{
+                echo 'Error:'. mysqli_error($conn);
+           }
+      }
+    else{
     }
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,14 +55,15 @@ if (isset($_POST['submit'])){
         <ul class="nav">
            <ul class="nav">
              <li><a href="index.php"> Acceuil</a></li>
-             <li><a href="produits.php">Produits</a> <!--  <ul class="submenu">
+             <li><a href="products.php">Produits</a> <!--  <ul class="submenu">
         <li><a href="#">Product 1</a></li>
         <li><a href="#">Product 2</a></li>
         <li><a href="#">Product 3</a></li>
       </ul> --></li>
              <li><a href="about.php"> à propos</a></li>
-             <li><a href="form.php"> Contact</a></li>
+             <li><a href="contact.php"> Contact</a></li>
              <li><a href="cart.php" class="bot"><i class="fa-solid fa-cart-plus"></i></a></li>
+
         </ul>
     </div>
      

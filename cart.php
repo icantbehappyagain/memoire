@@ -1,15 +1,19 @@
 <?php
-include('connexion.php');
+include 'config.php';
 session_start();
+if(!isset($_SESSION['email'])){
+    header('Location: login.php');
+    die;
+}
 $cart_products = "";
 $cart_total=0;
 
 if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
     $cart_products = implode(",", $_SESSION['cart']);
 
-    $hostname = 'localhost';
+    $hostname = 'localhost:3307';
     $username = 'root';
-    $password = '';
+    $password = 'root';
     
     // Create connection
         $connect = mysqli_connect($hostname ,$username ,$password, "memoire");
@@ -45,6 +49,34 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
 
 
 
+// اذا ضغط على الزر تم
+
+if (isset($_POST['submit'])){
+
+    $product =               mysqli_real_escape_string($conn ,$_POST['product']);
+    $client =                mysqli_real_escape_string($conn ,$_POST['client']);
+    $phone =                 mysqli_real_escape_string($conn ,$_POST['phone']);
+    $address =               mysqli_real_escape_string($conn ,$_POST['address']);
+    $total =                 mysqli_real_escape_string($conn ,$_POST['total']);
+    
+    $sql = "SELECT * FROM orders ";
+    $result = mysqli_query($conn, $sql);
+
+  $sql = "INSERT INTO `orders` ( product , client , phone  , address , total) 
+  VALUES( '$product' , '$client' , '$phone' , '$address' ,'$total' ) ";
+  $result = mysqli_query($conn, $sql) ;
+
+
+       if($result){
+        echo '<script>alert("Order sent succesfully!!");</script>';
+
+      }else{
+
+      }
+    }
+  
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +85,8 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/order.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
@@ -65,11 +98,12 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
     <!-- <a href="#"><img src="logo.png" class="logo"></a> -->
     <div>
         <ul class="nav">
-            <li><a class="active" href="index.php"> Acceuil</a></li>
-            <li><a href="produits.php">Produits</a> </li>
+            <li><a href="index.php"> Acceuil</a></li>
+            <li><a href="products.php">Produits</a> </li>
             <li><a href="about.html"> à propos</a></li>
-            <li><a href="form.php"> Contact</a></li>
-            <li><a href="cart.php" class="bot"><i class="fa-solid fa-cart-plus"></i></a></li>
+            <li><a href="contact.php"> Contact</a></li>
+            <li><a class="active"  href="cart.php" class="bot"><i class="fa-solid fa-cart-plus"></i></a></li>
+            <li><a href="logout.php">Logout</a></li>
        </ul>
     </div>
     
@@ -79,12 +113,14 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
 
 
 
-    <div class="wrapper">
-    <?php if (isset($products) && count($products) > 0) { ?>
-    <h1>Shopping Cart</h1>
-    <div class="project">
+<div class="weet-t1">
+
+    
+
+<div class="wrapper">
+                <?php if (isset($products) && count($products) > 0) { ?>
+                    <?php foreach ($products as $product) { ?>
         <div class="shop">
-            <?php foreach ($products as $product) { ?>
                 <div class="box">
                     <img src="<?= $product['image_path'] ?>">
                     <div class="content">
@@ -94,22 +130,12 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
                         <p class="btn-area"><a href="?remove=<?= $product['id'] ?>" class="btn2">Remove</a></p>
                     </div>
                 </div>
-            <?php
+        </div>
+        <?php
                 $cart_total += $product['price'];
+                $cart_name += $product['name'];
             }
             ?>
-        </div>
-        <div class="right-bar">
-            <p><span>Subtotal</span> <span>$<?= $cart_total ?></span></p>
-            
-            <hr>
-            <p><span>Total</span> <span>$<?= $cart_total ?></span></p>
-           
-             
-           
-                <a href="singin.php" class="btn">Acheter</a>
-        
-        </div>
         <?php
 			} else {
 				echo "
@@ -118,8 +144,47 @@ if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
 				";
 			}
 			?>
-    </div>
+</div>              
+
+	<!-- code here -->
+	<div class="card-p">
+		<div class="card-image">	
+			<h2 class="card-heading">
+        Total is $<?= $cart_total ?>
+			</h2>
+		</div>
+		<form class="card-form" action="" method="POST">
+        <input type="hidden" name="total" class="input-field" value="<?= $cart_total ?> Da" />
+        <input type="hidden" name="product" class="input-field" value="<?= $product['name'] ?>" />
+
+			<div class="input">
+				<input type="text" name="client" class="input-field" value="" required/>
+				<label class="input-label">Full name</label>
+			</div>
+						<div class="input">
+				<input type="number" name="phone" class="input-field" value="" required/>
+				<label class="input-label">Phone Number</label>
+			</div>
+						<div class="input">
+				<input type="text" name="address" class="input-field" required/>
+				<label class="input-label">Address</label>
+			</div>
+			<div class="action">
+				<button name="submit" class="action-button">Submit</button>
+			</div>
+		</form>
+	</div>
 </div>
+
+
+
+
+
+
+
+
+
+
 
 
 <!--LAST PART | START-->
