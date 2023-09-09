@@ -125,12 +125,6 @@ include "config.php";
   }
   }
   ?>    
-   <div class="col4 card" id="plus">
-    <div class="ovarly">
-    <h2>Voir plus de produits</h2>
-    <h1>+</h1>
-   </div>
-   </div>
   </div>
 </div>          
     <button class="carousel-button" onclick="prevSlide()"><</button>
