@@ -208,13 +208,6 @@ p{
     border-radius: 30px;
 }
 
-.row{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
 
 
 .center{
@@ -226,13 +219,34 @@ p{
 
 }
 
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
 
+.carousel {
+    display: flex;
+    transition: all 0.5s ease-in-out;
+}
 
+.card {
+    flex: 0 0 calc(20% - 80px);
+    margin-right: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-
-
-
-
+.carousel-button {
+    cursor: pointer;
+    padding: 15px 22px;
+    background-color: rgb(19, 163, 0);
+    color: #fff;
+    border: none;
+    border-radius: 100%;
+    margin: 10px;
+}
 
 .header.nav.pro{
     text-align: center;
@@ -242,62 +256,96 @@ p{
 /*  Cards ---------------------------- */
 .pro {
     width: 100%;
+    background-color: #ffffff;
     text-align: center;
     margin: 0 auto ;
     position: relative;
     line-height: 26px;
-    padding: 20px 60px;
+    padding: 60px 100px;
 }
 .weet-title{
-    padding: 30px;
-    text-align: center;
-
+    padding: 10px;
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
 }
 .hr{
     width: 100px;
     height: 5px;
-    margin: 20px auto;
+    margin-top: 20px;
     background: rgb(9,84,0);
     background: linear-gradient(90deg, rgba(9,84,0,1) 0%, rgba(37,199,0,1) 100%);
 }
 .weet-title h2{
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 20px;
+    text-align: left;
+}
+.carousel{
+        margin: 35px 30px;
+
 }
 .col4{
     color: #000;
-    height: 300px;
     background-color: #fff;
-    flex-basis: 23%;
+    height: 300px;
+    min-width: 250px;
     padding: 10px 12px;
-    width: 250px;
     border-radius: 15px;
     cursor: pointer;
-    margin: 15px 0;
+    border: #999999 1px solid;
     transition: 0.5s ease;
+    margin: 0 10px;
 }
+
 .col4:hover{
     box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.281);
 
 }
+#plus{
+    background-image: url(../pics/pexels.jpg);
+    background-size: 200%;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff; 
+    padding: 0;
+}
+.ovarly{
+    background-color: #0000009d;
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
 
+}
+.ovarly h1{
+    margin: 0 auto;
+}
 .col4 img{
     height: 60%;
     max-width: 100%;
-  border-radius: 16px;
+    border-radius: 16px;
 }
 .col4 p{
-    font-size: 18px;
+    font-size: 15px;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     color: #fff;
     border-radius: 50px;
     max-width: 100%;
-    margin:10px 50px ;
+    margin:10px 30px ;
     padding: 5px;
-    text-align: center;
+    background-color: rgb(19, 163, 0);
+}
+ .weet-title a{
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 50px;
+    padding: 5px 20px;
+    align-self: center;
     background-color: rgb(19, 163, 0);
 }
 .col4 h4{
@@ -450,19 +498,23 @@ ul {
 /*-------CART-------*/
 
 .wrapper {
-    max-width: 1000px;
-    margin: 0 auto;
+ 
 }
 .wrapper h1 {
     padding: 20px 0;
     text-align: center;
     text-transform: uppercase;
 }
-.project {
-    display: flex;
-}
+
 .shop {
-    flex: 75%;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px 0 rgba(153, 153, 153, 0.25);
+    padding: 0.75rem;
 }
 .box {
     display: flex;
@@ -742,3 +794,25 @@ ul {
         display: none;
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
