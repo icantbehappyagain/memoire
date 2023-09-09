@@ -52,7 +52,9 @@ if (!$resultat) {
         <ul>
             <li><img src="dashboard (2).png" alt=""> <a href="index.php">&nbsp; <span>Commandes</span> </a></li>
               <li><img src="dashboard (2).png" alt=""   > <a href="add.php">&nbsp; <span>Ajouter</span> </a></li>
-               <li><img src="dashboard (2).png" alt=""  > <a href="users.php">&nbsp; <span>Clients</span> </a></li>
+               <li><img src="dashboard (2).png" alt=""  > <a href="orders.php">&nbsp; <span>Orders</span> </a></li>
+               <li><img src="dashboard (2).png" alt=""  > <a href="logout.php">&nbsp; <span>Logout</span> </a></li>
+
 			   <div style="height: 350px;"></div>
                <li > <a class="nav-link px-3" href="deconnect.php">Deconnecter</a></li>
           </ul>
